@@ -1,0 +1,17 @@
+/home/michael/RiderProjects/Ulurum/tests/UlurumTest/obj/Debug/netcoreapp2.1/UlurumTest.csprojAssemblyReference.cache
+/home/michael/RiderProjects/Ulurum/tests/UlurumTest/obj/Debug/netcoreapp2.1/UlurumTest.csproj.CoreCompileInputs.cache
+/home/michael/RiderProjects/Ulurum/tests/UlurumTest/obj/Debug/netcoreapp2.1/UlurumTest.AssemblyInfoInputs.cache
+/home/michael/RiderProjects/Ulurum/tests/UlurumTest/obj/Debug/netcoreapp2.1/UlurumTest.AssemblyInfo.cs
+/home/michael/RiderProjects/Ulurum/tests/UlurumTest/bin/Debug/netcoreapp2.1/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/home/michael/RiderProjects/Ulurum/tests/UlurumTest/bin/Debug/netcoreapp2.1/xunit.runner.reporters.netcoreapp10.dll
+/home/michael/RiderProjects/Ulurum/tests/UlurumTest/bin/Debug/netcoreapp2.1/xunit.runner.utility.netcoreapp10.dll
+/home/michael/RiderProjects/Ulurum/tests/UlurumTest/bin/Debug/netcoreapp2.1/UlurumTest.deps.json
+/home/michael/RiderProjects/Ulurum/tests/UlurumTest/bin/Debug/netcoreapp2.1/UlurumTest.runtimeconfig.json
+/home/michael/RiderProjects/Ulurum/tests/UlurumTest/bin/Debug/netcoreapp2.1/UlurumTest.runtimeconfig.dev.json
+/home/michael/RiderProjects/Ulurum/tests/UlurumTest/bin/Debug/netcoreapp2.1/UlurumTest.dll
+/home/michael/RiderProjects/Ulurum/tests/UlurumTest/bin/Debug/netcoreapp2.1/UlurumTest.pdb
+/home/michael/RiderProjects/Ulurum/tests/UlurumTest/obj/Debug/netcoreapp2.1/UlurumTest.dll
+/home/michael/RiderProjects/Ulurum/tests/UlurumTest/obj/Debug/netcoreapp2.1/UlurumTest.pdb
+/home/michael/RiderProjects/Ulurum/tests/UlurumTest/bin/Debug/netcoreapp2.1/UlurumApi.dll
+/home/michael/RiderProjects/Ulurum/tests/UlurumTest/bin/Debug/netcoreapp2.1/UlurumApi.pdb
+/home/michael/RiderProjects/Ulurum/tests/UlurumTest/obj/Debug/netcoreapp2.1/UlurumTest.csproj.CopyComplete
