@@ -1,11 +1,12 @@
-using System;
 using System.Net;
 
 namespace UlurumApi.Exceptions
 {
-    public class EntityNotFoundException : Exception
+    public class EntityNotFoundException : HttpCodeException
     {
-        public EntityNotFoundException(string message) : base(message)
+        private new const HttpStatusCode Code = HttpStatusCode.NotFound;
+
+        public EntityNotFoundException(string message) : base(Code, message)
         {
         }
     }

@@ -1,10 +1,13 @@
 using System;
+using System.Net;
 
 namespace UlurumApi.Exceptions
 {
-    public class ForbiddenException : Exception
+    public class ForbiddenException : HttpCodeException
     {
-        public ForbiddenException(string message) : base(message)
+        private new const HttpStatusCode Code = HttpStatusCode.Forbidden;
+
+        public ForbiddenException(string message) : base(Code, message)
         {
         }
     }

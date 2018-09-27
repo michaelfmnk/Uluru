@@ -12,22 +12,21 @@ namespace UlurumApi.Controllers
         {
             var statusCode = HttpStatusCode.InternalServerError;
             var response = context.HttpContext.Response;
+            var message = "Internal Server Error";
 
             var exceptionType = context.Exception.GetType();
-            if (exceptionType == typeof(EntityNotFoundException))
-            {
-                statusCode = HttpStatusCode.NotFound;
-            }
 
-            if (exceptionType == typeof(NotAuthorizedException))
+            if (exceptionType == typeof(HttpCodeException))
             {
-                statusCode = HttpStatusCode.Unauthorized;
+                var ex = (HttpCodeException) context.Exception;
+                statusCode = ex.Code;
+                message = ex.Message;
             }
 
             context.ExceptionHandled = true;
             response.StatusCode = (int) statusCode;
             response.ContentType = "application/json";
-            var err = new ErrorContainer(context.Exception.Message);
+            var err = new ErrorContainer(message);
             response.HttpContext.Response.WriteAsync(JsonConvert.SerializeObject(err));
         }
     }

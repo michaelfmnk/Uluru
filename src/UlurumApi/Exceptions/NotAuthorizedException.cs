@@ -1,10 +1,12 @@
 using System;
+using System.Net;
 
 namespace UlurumApi.Exceptions
 {
-    public class NotAuthorizedException : Exception
+    public class NotAuthorizedException : HttpCodeException
     {
-        public NotAuthorizedException(string message) : base(message)
+        private new const HttpStatusCode Code = HttpStatusCode.Unauthorized;
+        public NotAuthorizedException(string message) : base(Code, message)
         {
         }
     }

@@ -28,8 +28,6 @@ namespace UlurumApi.Properties
             Configuration = configuration;
         }
         
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -60,7 +58,6 @@ namespace UlurumApi.Properties
             Migrate(connectionString);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -74,10 +71,10 @@ namespace UlurumApi.Properties
                     .AllowAnyOrigin());
             app.UseAuthentication();
             app.UseMvc();
-            app.Run(async (context) => { await context.Response.WriteAsync("Hello World!"); });
+            app.Run(async context => { await context.Response.WriteAsync("Hello World!"); });
         }
 
-        private void Migrate(string connectionString)
+        private static void Migrate(string connectionString)
         {
             var evolve = new Evolve.Evolve(new NpgsqlConnection(connectionString), Console.WriteLine)
             {
