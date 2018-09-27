@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -28,5 +29,7 @@ namespace UlurumApi.Entities
         
         [Column("salt")]
         public string Salt { get; set; }
+
+        public ICollection<Post> Posts { get; set; }
     }
 }

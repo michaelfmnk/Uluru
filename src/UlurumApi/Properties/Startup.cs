@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using Npgsql;
 using UlurumApi.Controllers;
 using UlurumApi.Repositories;
@@ -91,8 +95,9 @@ namespace UlurumApi.Properties
             services.AddTransient<IUsersService, UsersService>();
             services.AddScoped<TokenService>();
             services.AddScoped<UsersRepository>();
+            services.AddScoped<PostsRepository>();
             services.AddScoped<AuthService>();
-            
+            services.AddScoped<PostService>();
             services
                 .AddEntityFrameworkNpgsql()
                 .AddDbContext<ApiContext>(opt => opt.UseNpgsql(connectionString));

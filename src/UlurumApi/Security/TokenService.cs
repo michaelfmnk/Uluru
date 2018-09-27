@@ -1,6 +1,8 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using AngleSharp.Network.Default;
+using Microsoft.AspNetCore.WebSockets.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using UlurumApi.Entities;
@@ -49,6 +51,9 @@ namespace UlurumApi.Security
             user = _usersRepository.GetById(int.Parse(securityToken.Issuer));
             return securityToken.ValidTo > user.LastPasswordResetDate;
         }
+
+        // ReSharper disable once MemberCanBeMadeStatic.Global
+        public int GetUserIdFromToken(string cleanToken) => int.Parse(Handler.ReadToken(cleanToken).Issuer);
         
     }
 }

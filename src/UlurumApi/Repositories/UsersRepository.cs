@@ -1,5 +1,4 @@
 using System.Linq;
-using Microsoft.EntityFrameworkCore.Internal;
 using UlurumApi.Entities;
 using UlurumApi.Exceptions;
 
