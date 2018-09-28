@@ -1,25 +1,29 @@
-import { createStore, compose, applyMiddleware } from 'redux';
-import { fromJS } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
-import rootReducer from '../store';
+import { applyMiddleware, compose, createStore } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import thunk from 'redux-thunk';
-import api from '../middleware/api';
+import rootReducer from 'reducers';
+import { fromJS } from 'immutable';
+import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
+import api from 'middleware/api';
+import rootSaga from 'sagas';
 
 export default function configureStore(history) {
-    
+    const sagaMiddleware = createSagaMiddleware();
+
     const enhancers = [
 
     ];
 
-    const middlewares = [
+    const middleware = [
         api,
         thunk,
+        sagaMiddleware,
         routerMiddleware(history),
     ];
 
     const composedEnhancers = compose(
-        composeWithDevTools(applyMiddleware(...middlewares)),
+        composeWithDevTools(applyMiddleware(...middleware)),
         ...enhancers,
     );
 
@@ -28,6 +32,7 @@ export default function configureStore(history) {
         fromJS({}),
         composedEnhancers,
     );
-    
+
+    sagaMiddleware.run(rootSaga);
     return store;
 }
