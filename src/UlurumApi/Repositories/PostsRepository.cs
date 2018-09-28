@@ -14,10 +14,26 @@ namespace UlurumApi.Repositories
             _dbContext = dbContext;
         }
 
+        public Post FindById(int id)
+        {
+            var post = _dbContext.Posts.Find(id);
+            if (post == null)
+            {
+                throw new EntityNotFoundException("Post not found");
+            }
+
+            return post;
+        }
+
         public void Save(Post post)
         {
             _dbContext.Posts.Add(post);
             _dbContext.SaveChanges();
+        }
+
+        public void Delete(Post post)
+        {
+            _dbContext.Posts.Remove(post);
         }
     }
 }

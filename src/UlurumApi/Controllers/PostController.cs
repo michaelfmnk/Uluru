@@ -26,7 +26,13 @@ namespace UlurumApi.Controllers
             return _postService.CreatePost(post);
         }
 
-        
+        [HttpDelete(Api.Post.PostsById)]
+        public ActionResult DeletePost(int postId)
+        {
+            var userId = _tokenService.GetUserIdFromToken(GetCleanToken());
+            _postService.DeletePost(postId, userId);
+            return new NoContentResult();
+        }
         
         private string GetCleanToken()
         {
