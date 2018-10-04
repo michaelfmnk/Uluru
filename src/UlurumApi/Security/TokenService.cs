@@ -48,7 +48,7 @@ namespace UlurumApi.Security
                 ValidateLifetime = false
             };
             Handler.ValidateToken(token, parameters, out var securityToken);
-            user = _usersRepository.GetById(int.Parse(securityToken.Issuer));
+            user = _usersRepository.FindById(int.Parse(securityToken.Issuer));
             return securityToken.ValidTo > user.LastPasswordResetDate;
         }
 

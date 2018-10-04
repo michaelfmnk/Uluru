@@ -5,7 +5,7 @@ import { login } from 'actions/session';
 import { getLoginError } from 'selectors/session';
 
 const handleLogin = values => login({
-    login: values.get('login'),
+    email: values.get('login'),
     password: values.get('password'),
 });
 

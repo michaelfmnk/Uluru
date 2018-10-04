@@ -7,8 +7,7 @@ namespace UlurumApi.Entities
     [Table("posts")]
     public class Post
     {
-        [Key]
-        [Column("post_id")]
+        [Key, Column("post_id")]
         public int PostId { get; set; }
         
         [Column("title")]
@@ -21,7 +20,7 @@ namespace UlurumApi.Entities
         public int UserId { get; set; }
         
         [ForeignKey("UserId")]
-        public User user { get; set; }
+        public virtual User User { get; set; }
         
     }
 }

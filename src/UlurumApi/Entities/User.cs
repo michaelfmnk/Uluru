@@ -30,6 +30,14 @@ namespace UlurumApi.Entities
         [Column("salt")]
         public string Salt { get; set; }
 
-        public ICollection<Post> Posts { get; set; }
+        [InverseProperty(nameof(Post.User))]
+        public virtual ICollection<Post> Posts { get; set; }
+        
+        [InverseProperty(nameof(Subscription.Followed))]
+        public virtual ICollection<Subscription> Followers { get; set; }
+        
+        [InverseProperty(nameof(Subscription.Follower))]
+        public virtual ICollection<Subscription> Followed { get; set; }
+
     }
 }

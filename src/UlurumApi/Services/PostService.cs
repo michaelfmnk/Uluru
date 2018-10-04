@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using UlurumApi.Dtos;
 using UlurumApi.Entities;
 using UlurumApi.Exceptions;
@@ -9,10 +12,12 @@ namespace UlurumApi.Services
     public class PostService
     {
         private readonly PostsRepository _postsRepository;
+        private readonly UsersRepository _usersRepository;
 
-        public PostService(PostsRepository postsRepository)
+        public PostService(PostsRepository postsRepository, UsersRepository usersRepository)
         {
             _postsRepository = postsRepository;
+            _usersRepository = usersRepository;
         }
 
         public PostDto CreatePost(PostDto post)
@@ -32,6 +37,17 @@ namespace UlurumApi.Services
                 throw new ForbiddenException("You have no right to delete this post");
             }
             _postsRepository.Delete(post);
+        }
+
+        public IEnumerable<PostDto> GetFeedForUser(int userId)
+        {
+            var user = _usersRepository.FindById(userId);
+            
+            return user.Followed
+                .Select(item => item.Followed)
+                .SelectMany(item => item.Posts)
+                .OrderByDescending(item => item.Date)
+                .Select(Converter.ToDto);
         }
     }
 }

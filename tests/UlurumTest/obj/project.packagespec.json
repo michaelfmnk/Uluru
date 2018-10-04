@@ -1,13 +1,13 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "C:\\Users\\Michael Fomenko\\RiderProjects\\uluru\\tests\\UlurumTest\\UlurumTest.csproj",
+    "projectUniqueName": "/home/michael/RiderProjects/Ulurum/tests/UlurumTest/UlurumTest.csproj",
     "projectName": "UlurumTest",
-    "projectPath": "C:\\Users\\Michael Fomenko\\RiderProjects\\uluru\\tests\\UlurumTest\\UlurumTest.csproj",
-    "outputPath": "C:\\Users\\Michael Fomenko\\RiderProjects\\uluru\\tests\\UlurumTest\\obj\\",
+    "projectPath": "/home/michael/RiderProjects/Ulurum/tests/UlurumTest/UlurumTest.csproj",
+    "outputPath": "/home/michael/RiderProjects/Ulurum/tests/UlurumTest/obj/",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
-      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      "/usr/share/dotnet/sdk/NuGetFallbackFolder"
     ],
     "originalTargetFrameworks": [
       "netcoreapp2.1"
@@ -15,8 +15,8 @@
     "frameworks": {
       "netcoreapp2.1": {
         "projectReferences": {
-          "C:\\Users\\Michael Fomenko\\RiderProjects\\uluru\\src\\UlurumApi\\UlurumApi.csproj": {
-            "projectPath": "C:\\Users\\Michael Fomenko\\RiderProjects\\uluru\\src\\UlurumApi\\UlurumApi.csproj"
+          "/home/michael/RiderProjects/Ulurum/src/UlurumApi/UlurumApi.csproj": {
+            "projectPath": "/home/michael/RiderProjects/Ulurum/src/UlurumApi/UlurumApi.csproj"
           }
         }
       }

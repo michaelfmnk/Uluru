@@ -6,22 +6,20 @@ using UlurumApi.Services;
 namespace UlurumApi.Controllers
 {
     [Route(Api.Root)]
-    public class PostController : Controller
+    public class PostController : BaseController
     {
         private readonly PostService _postService;
-        private readonly TokenService _tokenService;
         
-        public PostController(PostService postService, TokenService tokenService)
+        public PostController(PostService postService, TokenService tokenService) : base(tokenService)
         {
             _postService = postService;
-            _tokenService = tokenService;
         }
 
         [HttpPost(Api.Post.Posts)]
         public PostDto CreatePost([FromBody] PostDto post)
         {
-            
-            var userId = _tokenService.GetUserIdFromToken(GetCleanToken());
+
+            var userId = GetUserIdFromToken();
             post.UserId = userId;
             return _postService.CreatePost(post);
         }
@@ -29,16 +27,12 @@ namespace UlurumApi.Controllers
         [HttpDelete(Api.Post.PostsById)]
         public ActionResult DeletePost(int postId)
         {
-            var userId = _tokenService.GetUserIdFromToken(GetCleanToken());
+            var userId = GetUserIdFromToken();
             _postService.DeletePost(postId, userId);
             return new NoContentResult();
         }
         
-        private string GetCleanToken()
-        {
-            string header = Request.Headers["Authorization"];
-            return header.Substring(7);
-        }
+
         
     }
 }

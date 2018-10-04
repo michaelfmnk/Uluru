@@ -7,11 +7,13 @@ import { likePostItem, loadFeed } from 'actions/feed';
 import PropTypes from 'prop-types';
 
 class FeedContainer extends PureComponent {
+    componentWillMount() {
+        this.props.loadFeed();
+    }
     handleLikeClick = (itemId) => {
         this.props.likePostItem(itemId);
         this.props.loadFeed();
     };
-
     render() {
         const {
             items,

@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
-import { startAction, successAction, failAction, UNAUTHORIZED } from 'actions/actionTypes';
-import { LOGIN, RESTORE_AUTH, REGISTER, VERIFY_USER, SIGN_OUT } from 'actions/session';
+import { failAction, startAction, successAction, UNAUTHORIZED } from 'actions/actionTypes';
+import { LOGIN, REGISTER, RESTORE_AUTH, SIGN_OUT, VERIFY_USER } from 'actions/session';
 
 const defaultState = fromJS({ logginIn: false, loggedIn: false });
 
@@ -20,7 +20,6 @@ export default function session(state = defaultState, action) {
         case successAction(REGISTER): {
             return state.merge({
                 registerError: null,
-                verifying: true,
                 registeredUserId: action.response.data.id,
             });
         }

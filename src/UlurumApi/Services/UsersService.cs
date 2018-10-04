@@ -13,6 +13,6 @@ namespace UlurumApi.Services
             _usersRepository = usersRepository;
         }
 
-        public UserDto GetUser(string email) => Converter.ToDto(_usersRepository.GetByEmail(email));
+        public UserDto GetUser(string email) => Converter.ToDto(_usersRepository.FindByEmail(email));
     }
 }

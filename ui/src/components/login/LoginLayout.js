@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Paper, Tab, Tabs, withStyles, Slide } from '@material-ui/core';
+import { Card, Paper, Tab, Tabs, withStyles } from '@material-ui/core';
 import LoginContainer from 'containers/login/LoginContainer';
-import CodeVerifierContainer from 'containers/login/CodeVerifierContainer';
-import { Switch, Route } from 'react-router';
+import { Route, Switch } from 'react-router';
 import { LOGIN, REGISTER } from 'data/routes';
 import RegisterContainer from 'containers/login/RegisterContainer';
 
@@ -37,7 +36,6 @@ class LoginLayout extends PureComponent {
     render() {
         const {
             classes,
-            verifying,
         } = this.props;
         const value = this.props.match.path;
         return (
@@ -65,21 +63,8 @@ class LoginLayout extends PureComponent {
                         <Switch>
                             <Route exact path={LOGIN} component={LoginContainer} />
                             <Route path={REGISTER} component={RegisterContainer} />
-
                         </Switch>
                     </Card>
-                    <Slide
-                        direction="up"
-                        in={verifying && value === REGISTER}
-                        unmountOnExit
-                        mountOnEnter
-                    >
-                        <Card
-                            className={classes.verifying}
-                        >
-                            <CodeVerifierContainer />
-                        </Card>
-                    </Slide>
                 </Paper>
             </div>
         );
@@ -91,7 +76,6 @@ LoginLayout.propTypes = {
     push: PropTypes.func,
     match: PropTypes.object,
     location: PropTypes.object,
-    verifying: PropTypes.bool,
 };
 
 export default withStyles(styles)(LoginLayout);

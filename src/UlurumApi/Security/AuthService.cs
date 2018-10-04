@@ -24,7 +24,7 @@ namespace UlurumApi.Services
         
         public TokenContainer Login(string email, string password)
         {
-            var user = _usersRepository.GetByEmail(email);
+            var user = _usersRepository.FindByEmail(email);
             if (!BCryptHelper.CheckPassword(password, user.Password))
             {
                 throw new NotAuthorizedException("User is not authorized");

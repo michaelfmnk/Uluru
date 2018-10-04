@@ -4,7 +4,7 @@ namespace UlurumApi.Dtos
     {
         public TokenContainer(string token)
         {
-            Token = token;
+            Token = "Bearer " + token;
         }
 
         public string Token { get; set; }

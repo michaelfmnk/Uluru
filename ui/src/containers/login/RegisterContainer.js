@@ -5,7 +5,7 @@ import { register } from 'actions/session';
 import { getRegisterError } from 'selectors/session';
 
 const handleRegister = values => register({
-    login: values.get('login'),
+    email: values.get('login'),
     password: values.get('password'),
 });
 

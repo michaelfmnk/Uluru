@@ -14,16 +14,16 @@ namespace UlurumApi.Repositories
             _dbContext = dbContext;
         }
 
-        public User GetById(int userId)
+        public User FindById(int userId)
         {
             var user = _dbContext.Users.Find(userId);
             return user ?? throw new EntityNotFoundException("not found");
         }
 
-        public User GetByEmail(string email)
+        public User FindByEmail(string email)
         {
             var user =  _dbContext.Users.FirstOrDefault(u => u.Email == email.ToLower());
-            return user ?? throw new EntityNotFoundException("not found");
+            return user ?? throw new EntityNotFoundException("User not found");
         }
 
         public bool ExistsByEmail(string email) => _dbContext.Users.Any(u => u.Email == email);

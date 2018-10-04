@@ -100,7 +100,7 @@ namespace UlurumApi.Properties
             services.AddScoped<PostService>();
             services
                 .AddEntityFrameworkNpgsql()
-                .AddDbContext<ApiContext>(opt => opt.UseNpgsql(connectionString));
+                .AddDbContext<ApiContext>(opt => { opt.UseLazyLoadingProxies().UseNpgsql(connectionString); });
         }
     }
 }

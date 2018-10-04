@@ -16,7 +16,7 @@ namespace UlurumApi.Controllers
 
             var exceptionType = context.Exception.GetType();
 
-            if (exceptionType == typeof(HttpCodeException))
+            if (typeof(HttpCodeException).IsAssignableFrom(exceptionType))
             {
                 var ex = (HttpCodeException) context.Exception;
                 statusCode = ex.Code;

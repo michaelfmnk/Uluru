@@ -38,7 +38,7 @@ module.exports = {
         historyApiFallback: true,
         proxy: {
             '/api': {
-                target: 'http://localhost',
+                target: 'http://localhost:4000',
                 changeOrigin: true,
                 cookieDomainRewrite: '',
             },

@@ -3,6 +3,7 @@ namespace UlurumApi.Controllers
     public static class Api
     {
         public const string Root = "/api";
+        public const string Feed = "feed";
 
         public static class Auth
         {
