@@ -1,6 +1,6 @@
 export function saveData(name, data) {
     try {
-        localStorage.setItem(name, JSON.stringify(data));
+        localStorage.setItem(name, data);
     } catch (err) {
         console.error(err);
     }

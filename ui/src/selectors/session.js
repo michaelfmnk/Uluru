@@ -9,6 +9,7 @@ export const getRegisteredUserId = state => state.getIn(['session', 'registeredU
 export const getAuthHeaders = createSelector(
     getToken,
     (token) => {
+        console.log('selector', token);
         const headers = {};
         if (token) {
             headers['Authorization'] = token; // eslint-disable-line

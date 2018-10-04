@@ -22,6 +22,6 @@ Content-Type: application/json
 
 GET http://localhost:4000/api/feed
 Content-Type: application/javascript
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1Mzg3NTk5MjgsImlzcyI6IjUiLCJhdWQiOiJkZWZhdWx0QXVkaWVuY2UifQ.HlB1vz3eqNbU8nEqno81DPn32xlw1zDT9oGb4AcbbWI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1Mzg3NjQ5NTUsImlzcyI6IjUiLCJhdWQiOiJkZWZhdWx0QXVkaWVuY2UifQ.qxLJ6GUhs27vb3B9YWAYcPpFTUCF4DSywhzoMQ5Vk8o
 
 ###

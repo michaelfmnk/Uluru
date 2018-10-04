@@ -20,8 +20,7 @@ namespace UlurumApi.Controllers
         {
 
             var userId = GetUserIdFromToken();
-            post.UserId = userId;
-            return _postService.CreatePost(post);
+            return _postService.CreatePost(post, userId);
         }
 
         [HttpDelete(Api.Post.PostsById)]

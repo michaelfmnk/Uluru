@@ -38,6 +38,9 @@ namespace UlurumApi.Entities
         
         [InverseProperty(nameof(Subscription.Follower))]
         public virtual ICollection<Subscription> Followed { get; set; }
+        
+        [Column("avatar_id")]
+        public string AvatarId { get; set; }
 
     }
 }

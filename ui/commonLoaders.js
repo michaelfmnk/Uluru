@@ -24,12 +24,12 @@ module.exports = [
             loader: 'babel-loader',
         },
     },
-    {
-        test: /\.js$/,
-        loader: 'eslint-loader',
-        exclude: [/node_modules/, /src\/thirdparty/, /src\/*\/__tests__/],
-        include: path.resolve('./../'),
-    },
+    // {
+    //     test: /\.js$/,
+    //     loader: 'eslint-loader',
+    //     exclude: [/node_modules/, /src\/thirdparty/, /src\/*\/__tests__/],
+    //     include: path.resolve('./../'),
+    // },
     {
         test: /\.json$/,
         loader: 'json-loader',

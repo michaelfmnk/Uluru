@@ -7,33 +7,27 @@ namespace UlurumApi.Services
     {
         public static UserDto ToDto(User entity)
         {
-            if (entity == null)
-            {
-                return null;
-            }
-            
+            if (entity == null) return null;
             return new UserDto
             {
                 Id = entity.UserId,
                 Email = entity.Email,
                 FirstName = entity.FirstName,
-                LastName = entity.LastName
+                LastName = entity.LastName,
+                AvatarId = entity.AvatarId
+                
             };
         }
 
         public static PostDto ToDto(Post entity)
         {
-            if (entity == null)
-            {
-                return null;
-            }
-            
+            if (entity == null) return null;
             return new PostDto
             {
                 Id = entity.PostId,
-                Title = entity.Title,
+                Content = entity.Content,
                 Date = entity.Date,
-                UserId = entity.UserId
+                User = ToBriefDto(entity.User)
             };
         }
 
@@ -41,9 +35,20 @@ namespace UlurumApi.Services
         {
             return new Post
             {
-                Title = dto.Title,
-                Date = dto.Date,
-                UserId = dto.UserId
+                Content = dto.Content,
+                Date = dto.Date
+            };
+        }
+
+        private static UserBriefDto ToBriefDto(User entity)
+        {
+            if (entity == null) return null;
+            return new UserBriefDto
+            {
+                Id = entity.UserId,
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
+                AvatarId = entity.AvatarId
             };
         }
         

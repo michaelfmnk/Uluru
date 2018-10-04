@@ -70,9 +70,10 @@ export default store => next => (action) => {
     }));
     store.dispatch({ type: SEND_REQUEST, requestType: type });
     const headers = getAuthHeaders(store.getState());
-    console.log('>>>>>>>>>>>>>>>>', headers);
+    
     headers.locale = getLocale();
-
+    console.log(headers);
+    
     return callApi(headers, method, endpoint, body, params, responseType).then(
         response => store.dispatch(actionWith({
             response: converter(response),

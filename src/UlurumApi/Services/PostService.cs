@@ -20,9 +20,10 @@ namespace UlurumApi.Services
             _usersRepository = usersRepository;
         }
 
-        public PostDto CreatePost(PostDto post)
+        public PostDto CreatePost(PostDto post, int userId)
         {
             var entity = Converter.ToEntity(post);
+            entity.UserId = userId;
             entity.Date = DateTime.Now;
             
             _postsRepository.Save(entity);

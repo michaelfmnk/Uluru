@@ -32,6 +32,7 @@ export default function session(state = defaultState, action) {
             return state.merge({ registerError: action.response.data.detail });
         }
         case RESTORE_AUTH: {
+            console.log('reducer', action.token);
             return fromJS({
                 logginIn: false,
                 loggedIn: true,

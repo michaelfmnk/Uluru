@@ -10,8 +10,8 @@ namespace UlurumApi.Entities
         [Key, Column("post_id")]
         public int PostId { get; set; }
         
-        [Column("title")]
-        public string Title { get; set; }
+        [Column("content")]
+        public string Content { get; set; }
         
         [Column("date")]
         public DateTime Date { get; set; }

@@ -1,22 +1,27 @@
 import { fromJS } from 'immutable';
 import { LIKE_FEED_ITEM } from 'actions/feed';
-import { normalize, schema } from 'normalizr';
 import { feed } from 'data/fakedata';
 
-const getDefaultState = () => {
-    const user = new schema.Entity('users');
-    const comment = new schema.Entity('comments', {
-        author: user,
-    });
-    const postArray = new schema.Array(new schema.Entity('posts', {
-        author: user,
-        comments: [comment],
-    }));
-    return fromJS(normalize(feed, postArray).entities);
-};
+const defaultState = fromJS({
+    users: {},
+    comments: {},
+    posts: {},    
+});
 
-
-export default function entitiesReducer(state = getDefaultState(), action) {
+export default function entitiesReducer(state = defaultState, action) {
+    if (action.response && action.response.normalizedData && action.response.normalizedData.entities) {
+        let newState = state;
+        
+        Object.keys(action.response.normalizedData.entities).forEach(entityName => {
+            if (!entityName) {
+                return state;
+            }
+            const entities = newState.get(entityName)
+                .merge(action.response.normalizedData.entities[entityName]);
+            return newState = newState.set(entityName, entities);
+        });
+        return newState;
+    }    
     switch (action.type) {
         case LIKE_FEED_ITEM: {
             return state.updateIn(['posts', action.postId.toString(), 'liked'], val => !val);

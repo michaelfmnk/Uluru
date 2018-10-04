@@ -30,6 +30,7 @@ const renderApp = () => render(
 
 const launch = () => {
     const token = extractTokenFromStore();
+    console.log(">>>>>>D", token);
     if (token) {
         store.dispatch(restoreAuth(token));
     }

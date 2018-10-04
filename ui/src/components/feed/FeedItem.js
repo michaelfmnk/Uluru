@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
     Card,
-    CardMedia,
     CardHeader,
     Avatar,
     CardActions,
@@ -10,13 +9,11 @@ import {
     Typography,
     withStyles,
     Collapse,
-    List,
 } from '@material-ui/core';
-import { Favorite, ExpandMore } from '@material-ui/icons';
+import { Favorite, ExpandMore, Share } from '@material-ui/icons';
 import PropTypes from 'prop-types';
 import dateformat from 'dateformat';
 import cx from 'classnames';
-import CommentItem from 'components/feed/CommentItem';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 
@@ -69,17 +66,15 @@ class FeedItem extends PureComponent {
             ...this.state,
             expanded: !this.state.expanded,
         });
-    }
+    };
 
     render() {
         const {
             id,
             title,
-            photoUrl,
             author,
             postDate,
-            description,
-            comments,
+            content,
         } = this.props;
         const {
             liked,
@@ -87,7 +82,6 @@ class FeedItem extends PureComponent {
         } = this.state;
         const {
             card,
-            media,
             likedStyle,
             expandOpen,
             expand,
@@ -97,20 +91,16 @@ class FeedItem extends PureComponent {
                 <CardHeader
                     avatar={
                         <Avatar
-                            alt={author.get('name')}
-                            src={author.get('avatar')}
+                            alt={author.get('firstName') + " " + author.get('lastName')}
+                            src={author.get('avatarId')}
                         />
                     }
                     title={title}
-                    subheader={`${author.get('name')}   |   ${dateformat(postDate, 'fullDate')}`}
-                />
-                <CardMedia
-                    className={media}
-                    image={photoUrl}
+                    subheader={`${author.get('firstName')} ${author.get('lastName')}  |   ${dateformat(postDate, 'fullDate')}`}
                 />
                 <CardContent>
                     <Typography>
-                        {description}
+                        {content}
                     </Typography>
                 </CardContent>
                 <CardActions>
@@ -119,6 +109,9 @@ class FeedItem extends PureComponent {
                         onClick={this.handleLikeClick(id)}
                     >
                         <Favorite />
+                    </IconButton>
+                    <IconButton>
+                        <Share />
                     </IconButton>
                     <IconButton
                         className={cx(expanded ? expandOpen : null, expand)}
@@ -129,17 +122,17 @@ class FeedItem extends PureComponent {
                     </IconButton>
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
-                    <List>
-                        {
-                            comments.map(comment => (
-                                <CommentItem
-                                    key={comment.get('id')}
-                                    content={comment.get('content')}
-                                    author={comment.get('author')}
-                                />
-                            ))
-                        }
-                    </List>
+                    {/*<List>*/}
+                        {/*{*/}
+                            {/*comments.map(comment => (*/}
+                                {/*<CommentItem*/}
+                                    {/*key={comment.get('id')}*/}
+                                    {/*content={comment.get('content')}*/}
+                                    {/*author={comment.get('author')}*/}
+                                {/*/>*/}
+                            {/*))*/}
+                        {/*}*/}
+                    {/*</List>*/}
                 </Collapse>
             </Card>
         );
