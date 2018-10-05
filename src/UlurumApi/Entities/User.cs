@@ -8,8 +8,7 @@ namespace UlurumApi.Entities
     [Table("users")]
     public class User
     {
-        [Key]
-        [Column("user_id")]
+        [Key, Column("user_id")]
         public int UserId { get; set; }
         
         [Column("login")]
@@ -30,6 +29,9 @@ namespace UlurumApi.Entities
         [Column("salt")]
         public string Salt { get; set; }
 
+        [Column("avatar_id")]
+        public string AvatarId { get; set; }
+        
         [InverseProperty(nameof(Post.User))]
         public virtual ICollection<Post> Posts { get; set; }
         
@@ -39,8 +41,7 @@ namespace UlurumApi.Entities
         [InverseProperty(nameof(Subscription.Follower))]
         public virtual ICollection<Subscription> Followed { get; set; }
         
-        [Column("avatar_id")]
-        public string AvatarId { get; set; }
-
+        [InverseProperty(nameof(Like.User))]
+        public virtual ICollection<Like> Likes { get; set; }
     }
 }

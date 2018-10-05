@@ -8,12 +8,12 @@ namespace UlurumApi.Entities
     {
         [Column("follower_user_id")]
         public int FollowerUserId { get; set; }
-        [ForeignKey("FollowerUserId")]
+        [ForeignKey(nameof(FollowerUserId))]
         public virtual User Follower { get; set; }
         
         [Column("followed_user_id")]
         public int FollowedUserId { get; set; }
-        [ForeignKey("FollowedUserId")]
+        [ForeignKey(nameof(FollowedUserId))]
         public virtual User Followed { get; set; }
     }
 }
