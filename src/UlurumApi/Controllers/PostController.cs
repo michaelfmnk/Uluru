@@ -23,15 +23,27 @@ namespace UlurumApi.Controllers
             return _postService.CreatePost(post, userId);
         }
 
-        [HttpDelete(Api.Post.PostsById)]
+        [HttpDelete(Api.Post.PostById)]
         public ActionResult DeletePost(int postId)
         {
             var userId = GetUserIdFromToken();
             _postService.DeletePost(postId, userId);
             return new NoContentResult();
         }
-        
 
+        [HttpPost(Api.Post.PostByIdLikes)]
+        public void LikePost(int postId)
+        {
+            var userId = GetUserIdFromToken();
+            _postService.LikePost(postId, userId);
+        }
         
+        [HttpDelete(Api.Post.PostByIdLikes)]
+        public ActionResult DeleteLike(int postId)
+        {
+            var userId = GetUserIdFromToken();
+            _postService.DeleteLike(postId, userId);
+            return new NoContentResult();
+        }
     }
 }

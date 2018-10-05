@@ -13,11 +13,14 @@ namespace UlurumApi.Services
     {
         private readonly PostsRepository _postsRepository;
         private readonly UsersRepository _usersRepository;
+        private readonly LikeRepository _likeRepository;
 
-        public PostService(PostsRepository postsRepository, UsersRepository usersRepository)
+        public PostService(PostsRepository postsRepository, UsersRepository usersRepository, 
+            LikeRepository likeRepository)
         {
             _postsRepository = postsRepository;
             _usersRepository = usersRepository;
+            _likeRepository = likeRepository;
         }
 
         public PostDto CreatePost(PostDto post, int userId)
@@ -49,6 +52,24 @@ namespace UlurumApi.Services
                 .SelectMany(item => item.Posts)
                 .OrderByDescending(item => item.Date)
                 .Select(Converter.ToDto);
+        }
+
+        public void LikePost(int postId, int userId)
+        {
+            var like = new Like
+            {
+                UserId = userId,
+                PostId = postId
+            };
+            _likeRepository.Save(like);
+        }
+
+        public void DeleteLike(int postId, int userId)
+        {
+            var user = _usersRepository.FindById(userId);
+            var likedPost = user.Likes.First(like => like.PostId == postId);
+            user.Likes.Remove(likedPost);
+            _usersRepository.Save(user);
         }
     }
 }

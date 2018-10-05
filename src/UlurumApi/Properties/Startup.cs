@@ -92,12 +92,14 @@ namespace UlurumApi.Properties
         {
             services.AddMvc(config => { config.Filters.Add(typeof(CustomExceptionHandler)); });
             services.AddCors();
-            services.AddTransient<IUsersService, UsersService>();
-            services.AddScoped<TokenService>();
             services.AddScoped<UsersRepository>();
             services.AddScoped<PostsRepository>();
+            services.AddScoped<LikeRepository>();
+           
+            services.AddScoped<TokenService>();
             services.AddScoped<AuthService>();
             services.AddScoped<PostService>();
+            services.AddTransient<IUsersService, UsersService>();
             services
                 .AddEntityFrameworkNpgsql()
                 .AddDbContext<ApiContext>(opt => { opt.UseLazyLoadingProxies().UseNpgsql(connectionString); });
