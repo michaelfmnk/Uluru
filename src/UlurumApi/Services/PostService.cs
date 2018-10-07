@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.InMemory.Storage.Internal;
 using UlurumApi.Dtos;
 using UlurumApi.Entities;
 using UlurumApi.Exceptions;
@@ -46,12 +47,18 @@ namespace UlurumApi.Services
         public IEnumerable<PostDto> GetFeedForUser(int userId)
         {
             var user = _usersRepository.FindById(userId);
+            var liked = user.Likes.Select(item => item.PostId);
             
             return user.Followed
                 .Select(item => item.Followed)
                 .SelectMany(item => item.Posts)
                 .OrderByDescending(item => item.Date)
-                .Select(Converter.ToDto);
+                .Select(Converter.ToDto)
+                .Select(item =>
+                {
+                    item.Liked = liked.Contains(item.Id);
+                    return item;
+                });
         }
 
         public void LikePost(int postId, int userId)
@@ -69,7 +76,18 @@ namespace UlurumApi.Services
             var user = _usersRepository.FindById(userId);
             var likedPost = user.Likes.First(like => like.PostId == postId);
             user.Likes.Remove(likedPost);
-            _usersRepository.Save(user);
+            _usersRepository.Persist(user);
+        }
+
+        public CommentReadDto CreateComment(CommentCreateDto commentDto, int postId, int userId)
+        {
+            var post = _postsRepository.FindById(postId);
+            var commentEntity = Converter.ToEntity(commentDto);
+            commentEntity.UserId = userId;
+            commentEntity.Date = DateTime.Now;
+            post.Comments.Add(commentEntity);
+            _postsRepository.Save(post);
+            return Converter.ToDto(commentEntity);
         }
     }
 }

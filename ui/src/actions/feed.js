@@ -5,14 +5,17 @@ export const LIKE_FEED_ITEM = 'LIKE_FEED_ITEM';
 export const GET_FEED = 'GET_FEED';
 
 
-export const likePostItem = postId => ({
-    [CALL_API]: {
-        type: LIKE_FEED_ITEM,
-        method: 'post',
-        endpoint: `/api/posts/${postId}/likes`,
-        postId,
-    },
-});
+export const likePostItem = (postId, liked) => {
+    console.log('LIKED',liked);
+    return ({
+        [CALL_API]: {
+            type: LIKE_FEED_ITEM,
+            method: liked ? 'delete' : 'post',
+            endpoint: `/api/posts/${postId}/likes`,
+            postId,
+        },
+    });
+};
 
 export const loadFeed = () => ({
     [CALL_API]: {

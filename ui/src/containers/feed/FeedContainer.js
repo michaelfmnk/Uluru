@@ -9,11 +9,12 @@ import PropTypes from 'prop-types';
 class FeedContainer extends PureComponent {
     componentWillMount() {
         this.props.loadFeed();
-    }
-    handleLikeClick = (itemId) => {
-        this.props.likePostItem(itemId);
-        this.props.loadFeed();
     };
+    
+    handleLikeClick = (itemId, liked) => {
+        this.props.likePostItem(itemId, liked);
+    };
+    
     render() {
         const {
             items,

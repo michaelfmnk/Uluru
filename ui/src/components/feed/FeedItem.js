@@ -15,6 +15,7 @@ import PropTypes from 'prop-types';
 import dateformat from 'dateformat';
 import cx from 'classnames';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import CommentInputItem from 'components/feed/CommentInputItem';
 
 
 const styles = theme => ({
@@ -58,7 +59,8 @@ class FeedItem extends PureComponent {
     }
 
     handleLikeClick = itemId => () => {
-        this.props.onLikeClick(itemId);
+        console.log('>>>>>>>>>>>>>>>>>>>>>>>>', this.state.liked);
+        this.props.onLikeClick(itemId, this.state.liked);
     };
 
     handleExpandClick = () => {
@@ -133,6 +135,7 @@ class FeedItem extends PureComponent {
                             {/*))*/}
                         {/*}*/}
                     {/*</List>*/}
+                    <CommentInputItem />
                 </Collapse>
             </Card>
         );

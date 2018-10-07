@@ -45,5 +45,12 @@ namespace UlurumApi.Controllers
             _postService.DeleteLike(postId, userId);
             return new NoContentResult();
         }
+
+        [HttpPost(Api.Post.PostByIdComments)]
+        public CommentReadDto CreateComment(int postId, [FromBody] CommentCreateDto dto)
+        {
+            var userId = GetUserIdFromToken();
+            return _postService.CreateComment(dto, postId, userId);
+        }
     }
 }

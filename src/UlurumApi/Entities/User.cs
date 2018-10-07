@@ -43,5 +43,8 @@ namespace UlurumApi.Entities
         
         [InverseProperty(nameof(Like.User))]
         public virtual ICollection<Like> Likes { get; set; }
+        
+        [InverseProperty(nameof(Comment.User))]
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

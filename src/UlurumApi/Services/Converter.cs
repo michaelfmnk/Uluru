@@ -1,3 +1,5 @@
+using System.Linq;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using UlurumApi.Dtos;
 using UlurumApi.Entities;
 
@@ -27,16 +29,21 @@ namespace UlurumApi.Services
                 Id = entity.PostId,
                 Content = entity.Content,
                 Date = entity.Date,
-                User = ToBriefDto(entity.User)
+                User = ToBriefDto(entity.User),
+            
             };
         }
 
-        public static Post ToEntity(PostDto dto)
+        public static CommentReadDto ToDto(Comment entity)
         {
-            return new Post
+            if (entity == null) return null;
+            return new CommentReadDto
             {
-                Content = dto.Content,
-                Date = dto.Date
+                Id = entity.CommentId,
+                Content = entity.Content,
+                Date = entity.Date,
+                PostId = entity.PostId,
+                User = ToBriefDto(entity.User)
             };
         }
 
@@ -52,5 +59,24 @@ namespace UlurumApi.Services
             };
         }
         
+        // to entity
+        
+        public static Post ToEntity(PostDto dto)
+        {
+            return new Post
+            {
+                Content = dto.Content,
+                Date = dto.Date
+            };
+        }
+
+        public static Comment ToEntity(CommentCreateDto dto)
+        {
+            return new Comment
+            {
+                Content = dto.Content
+            };
+        }
+
     }
 }

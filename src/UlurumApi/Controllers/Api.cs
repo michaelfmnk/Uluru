@@ -14,8 +14,9 @@ namespace UlurumApi.Controllers
         public static class Post
         {
             public const string Posts = "posts";
-            public const string PostById = "posts/{post_id}";
-            public const string PostByIdLikes = "posts/{post_id}/likes";
+            public const string PostById = "posts/{postId:int}";
+            public const string PostByIdLikes = "posts/{postId:int}/likes";
+            public const string PostByIdComments = "posts/{postId:int}/comments";
         }
 
     }
