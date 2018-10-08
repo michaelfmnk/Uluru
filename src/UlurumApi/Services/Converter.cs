@@ -30,7 +30,7 @@ namespace UlurumApi.Services
                 Content = entity.Content,
                 Date = entity.Date,
                 User = ToBriefDto(entity.User),
-            
+                Comments = entity.Comments.Select(ToDto)
             };
         }
 

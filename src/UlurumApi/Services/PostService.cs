@@ -76,7 +76,7 @@ namespace UlurumApi.Services
             var user = _usersRepository.FindById(userId);
             var likedPost = user.Likes.First(like => like.PostId == postId);
             user.Likes.Remove(likedPost);
-            _usersRepository.Persist(user);
+            _usersRepository.Persist();
         }
 
         public CommentReadDto CreateComment(CommentCreateDto commentDto, int postId, int userId)
@@ -86,7 +86,7 @@ namespace UlurumApi.Services
             commentEntity.UserId = userId;
             commentEntity.Date = DateTime.Now;
             post.Comments.Add(commentEntity);
-            _postsRepository.Save(post);
+            _postsRepository.Persist();
             return Converter.ToDto(commentEntity);
         }
     }

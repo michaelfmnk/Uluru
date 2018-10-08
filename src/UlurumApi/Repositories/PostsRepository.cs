@@ -31,6 +31,11 @@ namespace UlurumApi.Repositories
             _dbContext.SaveChanges();
         }
 
+        public void Persist()
+        {
+            _dbContext.SaveChanges();
+        }
+
         public void Delete(Post post)
         {
             _dbContext.Posts.Remove(post);

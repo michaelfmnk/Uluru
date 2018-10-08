@@ -35,10 +35,9 @@ namespace UlurumApi.Repositories
             return user;
         }
 
-        public User Persist(User user)
+        public void Persist()
         {
             _dbContext.SaveChanges();
-            return user;
         }
     }
 }
