@@ -14,11 +14,11 @@ class CommentItem extends PureComponent {
             <ListItem>
                 <ListItemAvatar>
                     <Avatar
-                        src={author.get('avatar')}
+                        src={author.get('avatarId')}
                     />
                 </ListItemAvatar>
                 <ListItemText secondary={content}>
-                    {author.get('name')}
+                    {author.get('firstName')}
                 </ListItemText>
             </ListItem>
         );

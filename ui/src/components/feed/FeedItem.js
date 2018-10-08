@@ -9,6 +9,7 @@ import {
     Typography,
     withStyles,
     Collapse,
+    List,
 } from '@material-ui/core';
 import { Favorite, ExpandMore, Share } from '@material-ui/icons';
 import PropTypes from 'prop-types';
@@ -16,6 +17,7 @@ import dateformat from 'dateformat';
 import cx from 'classnames';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import CommentInputItem from 'components/feed/CommentInputItem';
+import CommentItem from 'components/feed/CommentItem';
 
 
 const styles = theme => ({
@@ -59,8 +61,11 @@ class FeedItem extends PureComponent {
     }
 
     handleLikeClick = itemId => () => {
-        console.log('>>>>>>>>>>>>>>>>>>>>>>>>', this.state.liked);
         this.props.onLikeClick(itemId, this.state.liked);
+    };
+    
+    handleCommentSubmit = (content) => {
+        this.props.onCommentSubmit(this.props.id, content)        
     };
 
     handleExpandClick = () => {
@@ -69,6 +74,16 @@ class FeedItem extends PureComponent {
             expanded: !this.state.expanded,
         });
     };
+    
+    renderName(fName, lName) {
+        fName = fName ? fName : '';
+        lName = lName ? lName : '';
+        return `${fName} ${lName}`.trim();
+    }
+    
+    renderHeader(fName, lName, date) {
+        return `${this.renderName(fName, lName)} | ${dateformat(date, 'fullDate')}`
+    }
 
     render() {
         const {
@@ -77,6 +92,7 @@ class FeedItem extends PureComponent {
             author,
             postDate,
             content,
+            comments
         } = this.props;
         const {
             liked,
@@ -98,7 +114,7 @@ class FeedItem extends PureComponent {
                         />
                     }
                     title={title}
-                    subheader={`${author.get('firstName')} ${author.get('lastName')}  |   ${dateformat(postDate, 'fullDate')}`}
+                    subheader={this.renderHeader(author.get('firstName'), author.get('lastName'), postDate)}
                 />
                 <CardContent>
                     <Typography>
@@ -124,18 +140,21 @@ class FeedItem extends PureComponent {
                     </IconButton>
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
-                    {/*<List>*/}
-                        {/*{*/}
-                            {/*comments.map(comment => (*/}
-                                {/*<CommentItem*/}
-                                    {/*key={comment.get('id')}*/}
-                                    {/*content={comment.get('content')}*/}
-                                    {/*author={comment.get('author')}*/}
-                                {/*/>*/}
-                            {/*))*/}
-                        {/*}*/}
-                    {/*</List>*/}
-                    <CommentInputItem />
+                    <List>
+                        {
+                            
+                            comments.map(comment => (
+                                <CommentItem
+                                    key={comment.get('id')}
+                                    content={comment.get('content')}
+                                    author={comment.get('user')}
+                                />
+                            ))
+                        }
+                    </List>
+                    <CommentInputItem 
+                        onSubmit={this.handleCommentSubmit}
+                    />
                 </Collapse>
             </Card>
         );

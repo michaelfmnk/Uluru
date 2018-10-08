@@ -3,6 +3,7 @@ import schemas from 'data/schemas';
 import { normalizeEntityResponse } from '../utils/converters';
 export const LIKE_FEED_ITEM = 'LIKE_FEED_ITEM';
 export const GET_FEED = 'GET_FEED';
+export const SEND_COMMENT = 'SEND_COMMENT';
 
 
 export const likePostItem = (postId, liked) => {
@@ -23,5 +24,16 @@ export const loadFeed = () => ({
         method: 'get',
         endpoint: '/api/feed',
         converter: normalizeEntityResponse(schemas.POST_ARRAY),
+    },
+});
+
+export const sendComment = (postId, content) => ({
+    [CALL_API]: {
+        type: SEND_COMMENT,
+        method: 'post',
+        endpoint: `/api/posts/${postId}/comments`,
+        body: {
+            content,
+        }
     },
 });

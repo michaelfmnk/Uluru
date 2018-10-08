@@ -1,10 +1,23 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import { toJS } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { getFeedItems } from 'selectors/posts';
 import FeedItem from 'components/feed/FeedItem';
-import { likePostItem, loadFeed } from 'actions/feed';
 import PropTypes from 'prop-types';
+import ProfilePopup from 'components/layout/ProfilePopup';
+import { connect } from 'react-redux';
+import { getFeedItems } from 'selectors/posts';
+import { likePostItem, loadFeed, sendComment } from 'actions/feed';
+import { Grid, Button, withStyles } from '@material-ui/core';
+import { Add } from '@material-ui/icons';
+
+const styles = theme => ({
+   button: {
+       margin: theme.spacing.unit,
+       position: 'fixed',
+       bottom: 40,
+       right: 50,
+   } 
+});
 
 class FeedContainer extends PureComponent {
     componentWillMount() {
@@ -15,26 +28,50 @@ class FeedContainer extends PureComponent {
         this.props.likePostItem(itemId, liked);
     };
     
+    handleCommentSubmit = (postId, content) => {
+        this.props.sendComment(postId, content);
+    };
+    
     render() {
         const {
             items,
+            classes,
         } = this.props;
+        console.log(items.toJS());
         return (
-            <div>
-                {
-                    items.map(item => (
-                        <FeedItem
-                            key={item.get('id')}
-                            id={item.get('id')}
-                            content={item.get('content')}
-                            liked={item.get('liked')}
-                            postDate={item.get('date')}
-                            author={item.get('user')}
-                            onLikeClick={this.handleLikeClick}
-                        />
-                    ))
-                }
-            </div>
+            <Grid container spacing={1}>
+                <Grid item xs={7}>
+                    {
+                        items.map(item => (
+                            <FeedItem
+                                key={item.get('id')}
+                                id={item.get('id')}
+                                content={item.get('content')}
+                                liked={item.get('liked')}
+                                postDate={item.get('date')}
+                                author={item.get('user')}
+                                comments={item.get('comments')}
+                                onLikeClick={this.handleLikeClick}
+                                onCommentSubmit={this.handleCommentSubmit}
+                            />
+                        ))
+                    }
+                    
+                </Grid>
+                <Grid 
+                    item 
+                    xs={5}
+                >
+                    <ProfilePopup />
+                </Grid>
+                <Button 
+                    variant={"fab"} 
+                    color={"primary"} 
+                    className={classes.button}
+                >
+                    <Add />
+                </Button>
+            </Grid>
         );
     }
 }
@@ -49,4 +86,4 @@ const mapStateToProps = state => ({
     items: getFeedItems(state),
 });
 
-export default connect(mapStateToProps, { likePostItem, loadFeed })(FeedContainer);
+export default connect(mapStateToProps, { likePostItem, loadFeed, sendComment })(withStyles(styles)(FeedContainer));

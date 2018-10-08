@@ -3,9 +3,7 @@ import { Paper, TextField, Avatar, Grid, withStyles, IconButton } from '@materia
 import { Send } from '@material-ui/icons';
 
 const styles = () => ({
-    container: {
-        margin: '300px',        
-    },
+
 });
 
 
@@ -16,14 +14,28 @@ class CommentInputItem extends PureComponent {
     
     constructor(props) {
         super(props);
+        this.setState({
+            content: '',
+        });
     }
+    
+    handleContentChange = (val) => {
+        console.log(val.target.value);
+        this.setState({
+            content: val.target.value,
+        })           
+    };
+    
+    handleSubmit = () => {
+        this.props.onSubmit(this.state.content);
+    };
 
     render() {
         const {
             classes
         } = this.props;
         return (
-            <div style={{ padding: 10 }}>
+            <div style={{ padding: 20 }}>
                 <Grid 
                     container 
                     spacing={20}
@@ -40,11 +52,12 @@ class CommentInputItem extends PureComponent {
                             placeholder={"Write your comment..."}
                             multiline={true}
                             fullWidth={true}    
+                            onChange={this.handleContentChange}
                             labelWidth={"Comment"} 
                         />
                     </Grid>
                     <Grid item xs={1}>
-                        <IconButton>
+                        <IconButton onClick={this.handleSubmit}>
                             <Send />
                         </IconButton>
                     </Grid>
