@@ -19,5 +19,11 @@ namespace UlurumApi.Controllers
             public const string PostByIdComments = "posts/{postId:int}/comments";
         }
 
+        public static class User
+        {
+            public const string UserById = "users/{userId:int}";
+            public const string Profile = "profile";
+        }
+
     }
 }

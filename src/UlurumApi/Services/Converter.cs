@@ -47,7 +47,7 @@ namespace UlurumApi.Services
             };
         }
 
-        private static UserBriefDto ToBriefDto(User entity)
+        public static UserBriefDto ToBriefDto(User entity)
         {
             if (entity == null) return null;
             return new UserBriefDto

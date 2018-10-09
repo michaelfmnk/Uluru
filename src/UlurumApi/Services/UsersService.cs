@@ -14,5 +14,17 @@ namespace UlurumApi.Services
         }
 
         public UserDto GetUser(string email) => Converter.ToDto(_usersRepository.FindByEmail(email));
+        
+        public UserDto GetProfile(int userId)
+        {
+            var user = _usersRepository.FindById(userId);
+            return Converter.ToDto(user);
+        }
+
+        public UserBriefDto GetBriefUser(int userId)
+        {
+            var user = _usersRepository.FindById(userId);
+            return Converter.ToBriefDto(user);
+        }
     }
 }
