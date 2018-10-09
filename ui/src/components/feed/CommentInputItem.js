@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Paper, TextField, Avatar, Grid, withStyles, IconButton } from '@material-ui/core';
 import { Send } from '@material-ui/icons';
 
@@ -7,16 +7,16 @@ const styles = () => ({
 });
 
 
-class CommentInputItem extends PureComponent {
+class CommentInputItem extends Component {
     static PropTypes = {
             
     };
     
     constructor(props) {
         super(props);
-        this.setState({
+        this.state = {
             content: '',
-        });
+        }
     }
     
     handleContentChange = (val) => {
@@ -28,6 +28,9 @@ class CommentInputItem extends PureComponent {
     
     handleSubmit = () => {
         this.props.onSubmit(this.state.content);
+        this.setState({
+           content: '', 
+        });
     };
 
     render() {
@@ -51,7 +54,8 @@ class CommentInputItem extends PureComponent {
                         <TextField
                             placeholder={"Write your comment..."}
                             multiline={true}
-                            fullWidth={true}    
+                            fullWidth={true}  
+                            value={this.state.content}
                             onChange={this.handleContentChange}
                             labelWidth={"Comment"} 
                         />

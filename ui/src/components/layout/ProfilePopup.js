@@ -20,7 +20,7 @@ const styles = () => ({
     name: {
        fontSize: 30,
        marginTop: -0.9 * (avatarSize/2),
-       marginLeft: (avatarSize * 0.18) + '%',
+       marginLeft: (avatarSize * 0.2) + '%',
     },
     container: {
        marginTop: 70,

@@ -1,10 +1,10 @@
 import { fork, takeLatest, select, put } from 'redux-saga/effects';
-import { LOGIN, VERIFY_USER, SIGN_OUT } from 'actions/session';
+import { LOGIN, VERIFY_USER, SIGN_OUT, RESTORE_AUTH } from 'actions/session';
 import { LIKE_FEED_ITEM, loadFeed, SEND_COMMENT } from 'actions/feed';
 import { getCurrentUser } from 'actions/users';
 import { successAction } from 'actions/actionTypes';
 import { saveTokenToStore, deleteTokenFromStore } from 'utils/session';
-import { getToken } from 'selectors/session';
+import { getToken, getIsLoggedIn } from 'selectors/session';
 
 
 function* saveToken() {
@@ -42,7 +42,12 @@ function* watchComment() {
     yield takeLatest(successAction(SEND_COMMENT), fetchFeed);
 }
 
+function* loadUser() {
+    yield takeLatest(RESTORE_AUTH, getUser);
+}
+
 export default function* rootSaga() {
+    yield fork(loadUser);
     yield fork(watchLogin);
     yield fork(watchVerifyUser);
     yield fork(watchSignOut);
