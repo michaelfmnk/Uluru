@@ -60,7 +60,7 @@ class TopBar extends PureComponent {
         const open = Boolean(anchorEl);
 
         return (
-            <AppBar position="absolute">
+            <AppBar position="fixed">
                 <Toolbar className={toolBar}>
                     <div className={menu}>
                         <img

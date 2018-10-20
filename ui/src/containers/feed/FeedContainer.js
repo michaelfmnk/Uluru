@@ -62,7 +62,9 @@ class FeedContainer extends PureComponent {
                     item 
                     xs={5}
                 >
-                    <ProfilePopup />
+                    <div style={{'position': 'fixed', 'width': '50em'}}>
+                        <ProfilePopup />
+                    </div>
                 </Grid>
                 <Button 
                     variant={"fab"} 
