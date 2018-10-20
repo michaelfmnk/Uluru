@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Paper, TextField, Avatar, Grid, withStyles, IconButton } from '@material-ui/core';
 import { Send } from '@material-ui/icons';
 
@@ -9,7 +10,7 @@ const styles = () => ({
 
 class CommentInputItem extends Component {
     static PropTypes = {
-            
+        authorAvatar: PropTypes.string,            
     };
     
     constructor(props) {
@@ -34,9 +35,6 @@ class CommentInputItem extends Component {
     };
 
     render() {
-        const {
-            classes
-        } = this.props;
         return (
             <div style={{ padding: 20 }}>
                 <Grid 
@@ -46,7 +44,7 @@ class CommentInputItem extends Component {
                 >
                     <Grid item xs={1}>
                         <Avatar 
-                            src={"https://i.imgur.com/GuAB8OE.jpg"}
+                            src={this.props.authorAvatar}
                         />
                     </Grid> 
                     

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 
-class CommentItem extends PureComponent {
+export default class CommentItem extends PureComponent {
     render() {
         const {
             content,
@@ -29,5 +29,3 @@ CommentItem.propTypes = {
     content: PropTypes.string.isRequired,
     author: ImmutablePropTypes.Map,
 };
-
-export default CommentItem;

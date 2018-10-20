@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import dateformat from 'dateformat';
 import cx from 'classnames';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import CommentInputItem from 'components/feed/CommentInputItem';
+import CommentInputItem from 'containers/feed/CommentInputItemContainer';
 import CommentItem from 'components/feed/CommentItem';
 
 
