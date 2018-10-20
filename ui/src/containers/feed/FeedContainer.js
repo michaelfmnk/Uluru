@@ -3,7 +3,7 @@ import { toJS } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import FeedItem from 'components/feed/FeedItem';
 import PropTypes from 'prop-types';
-import ProfilePopup from 'components/layout/ProfilePopup';
+import ProfilePopup from 'containers/layout/ProfilePopupContainer';
 import { connect } from 'react-redux';
 import { getFeedItems } from 'selectors/posts';
 import { likePostItem, loadFeed, sendComment } from 'actions/feed';

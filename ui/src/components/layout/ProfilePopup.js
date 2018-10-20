@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Grid, withStyles, Card, CardContent, Typography, CardMedia, Avatar } from '@material-ui/core';
 
 const avatarSize = 180;
@@ -15,12 +16,12 @@ const styles = () => ({
        width: avatarSize, 
        height: avatarSize, 
        marginTop: -1.1 * (avatarSize/2),
-       marginLeft: (avatarSize * 0.05) + '%',
+       marginLeft: '3em',
     },
     name: {
        fontSize: 30,
        marginTop: -0.9 * (avatarSize/2),
-       marginLeft: (avatarSize * 0.2) + '%',
+       marginLeft: '9em',
     },
     container: {
        marginTop: 70,
@@ -32,10 +33,20 @@ const styles = () => ({
 });
 
 class ProfilePopup extends PureComponent {
+    static PropTypes = {
+        user: PropTypes.object.required,        
+    };
+    
+    renderUserName = () => {
+        return this.props.user &&
+            `${this.props.user.get('firstName')} ${this.props.user.get('lastName')}`;
+    };
+    
     render() {
         const {
             classes,
         } = this.props;
+        
         return (
             <Card className={classes.paper}>
                 <CardMedia
@@ -43,10 +54,13 @@ class ProfilePopup extends PureComponent {
                    image={"https://i.imgur.com/E5jRWCr.jpg"}/>
                 <Avatar 
                     className={classes.avatar}
-                    src={"https://i.imgur.com/GuAB8OE.jpg"}
+                    src={this.props.user && this.props.user.get('avatarId')}
                 />
                 <Typography className={classes.name}>
-                    Neil deGrasse Tyson
+                    {
+                        this.props.user &&
+                            this.renderUserName()
+                    }
                 </Typography>
                 <CardContent className={classes.container}>
                     <Grid container justify={"center"} spacing={100}>
