@@ -48,10 +48,10 @@ namespace UlurumApi.Services
         {
             var user = _usersRepository.FindById(userId);
             var liked = user.Likes.Select(item => item.PostId);
-            
             return user.Followed
                 .Select(item => item.Followed)
                 .SelectMany(item => item.Posts)
+                .Concat(user.Posts)
                 .OrderByDescending(item => item.Date)
                 .Select(Converter.ToDto)
                 .Select(item =>

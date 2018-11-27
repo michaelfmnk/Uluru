@@ -20,5 +20,5 @@ export const getFeedItems = createSelector(
                     .map(comment => comment.update('user', val => users.get(val.toString())));
                 return post.set('comments', newComments);
             })
-    ,
+            .sort((a, b) => new Date(b.get('date')) - new Date(a.get('date'))),
 );

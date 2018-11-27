@@ -6,11 +6,12 @@ const comment = new schema.Entity('comments', {
     user: user,
 });
 
-const postArray = new schema.Array(new schema.Entity('posts', {
+const post = new schema.Entity('posts', {
     user: user,
-    comments: [comment] 
-}));
+    comments: [comment]
+});
 
 export default {
-    POST_ARRAY: postArray,
+    POST_ARRAY: [post],
+    POST: post,
 };

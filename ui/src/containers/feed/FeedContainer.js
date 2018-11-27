@@ -1,5 +1,4 @@
-import React, { PureComponent } from 'react';
-import { toJS } from 'immutable';
+import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import FeedItem from 'components/feed/FeedItem';
 import PropTypes from 'prop-types';
@@ -9,6 +8,7 @@ import { getFeedItems } from 'selectors/posts';
 import { likePostItem, loadFeed, sendComment } from 'actions/feed';
 import { Grid, Button, withStyles } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
+import PostCreationModel from 'containers/feed/PostCreationContainer';
 
 const styles = theme => ({
    button: {
@@ -19,7 +19,12 @@ const styles = theme => ({
    } 
 });
 
-class FeedContainer extends PureComponent {
+class FeedContainer extends Component {
+    
+    static state = {
+        postCreationShown: false,    
+    };
+    
     componentWillMount() {
         this.props.loadFeed();
     };
@@ -32,13 +37,26 @@ class FeedContainer extends PureComponent {
         this.props.sendComment(postId, content);
     };
     
+    handleCreatePostClick = () => {
+        this.setState({
+            postCreationShown: true,
+        });
+    };
+    
+    handleDismissPostCreation = () => {
+        this.setState({
+            postCreationShown: false,
+        });
+    };
+    
     render() {
         const {
             items,
             classes,
         } = this.props;
-        console.log(items.toJS());
+        console.log(this.state);
         return (
+            <div>
             <Grid container spacing={1}>
                 <Grid item xs={7}>
                     {
@@ -56,7 +74,6 @@ class FeedContainer extends PureComponent {
                             />
                         ))
                     }
-                    
                 </Grid>
                 <Grid 
                     item 
@@ -66,14 +83,22 @@ class FeedContainer extends PureComponent {
                         <ProfilePopup />
                     </div>
                 </Grid>
-                <Button 
-                    variant={"fab"} 
+                <Button
+                    variant={"fab"}
+                    onClick={this.handleCreatePostClick}
                     color={"primary"} 
                     className={classes.button}
                 >
                     <Add />
                 </Button>
             </Grid>
+                { 
+                    this.state && this.state.postCreationShown && 
+                        <PostCreationModel 
+                            handleClose={this.handleDismissPostCreation}
+                        /> 
+                }
+            </div>
         );
     }
 }

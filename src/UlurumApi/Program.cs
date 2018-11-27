@@ -14,7 +14,7 @@ namespace UlurumApi
         public static IWebHost BuildHost(string[] args) =>
                 WebHost.CreateDefaultBuilder(args)
                     .UseStartup<Startup>()
-                    .UseUrls("http://localhost:4000")
+                    .UseUrls("http://localhost:5050")
                     .Build();
     }
 }

@@ -1,7 +1,7 @@
 {
   "name": "AldrinUI",
   "version": "0.1.0",
-  "proxy":"http://localhost:4000",
+  "proxy":"http://localhost:5050",
   "private": true,
   "scripts": {
     "build": "rm -rf dist && webpack --mode production --config ./webpack.config.dev.js -p --color --progress && npm run po2json",
